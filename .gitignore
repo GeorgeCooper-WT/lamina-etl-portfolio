@@ -1,0 +1,33 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python cache and environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+env/
+venv/
+pip-log.txt
+
+# VS Code settings
+.vscode/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Mac system files
+.Spotlight-V100
+.Trashes
+
+# Windows system files
+ehthumbs.db
