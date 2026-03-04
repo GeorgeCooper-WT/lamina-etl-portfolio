@@ -11,7 +11,7 @@ Standalone Python scripts demonstrating robust ETL (Extract, Transform, Load) pi
 - Data merging and transformation
 - Batch writing to InfluxDB
 
-See [etl/README.md](etl/README.md) for details.
+See [etl/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/etl/README.md) for details.
 
 ### 2. terraform
 Terraform infrastructure-as-code for a scalable AWS data lake architecture. Features include:
@@ -19,7 +19,7 @@ Terraform infrastructure-as-code for a scalable AWS data lake architecture. Feat
 - Lifecycle and cost optimisation policies
 - Secure IAM, encryption, and secrets management
 
-See [terraform/README.md](terraform/README.md) for details.
+See [terraform/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/terraform/README.md) for details.
 
 ---
 
