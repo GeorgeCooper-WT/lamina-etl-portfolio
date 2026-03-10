@@ -4,7 +4,7 @@
 This repository showcases an approach to building secure, scalable, and production-ready data solutions for the Lamina Energy solar analytics platform.
 
 **Model Validation Report Abstract:**
-See [abstract-lamina-ml-validation-report.pdf]([reports/abstract-lamina-ml-validation.pdf](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/reports/lamina-ml-validation-abstract.pdf) for the executive summary and contents of the Lamina ML model validation report. The full report is available on request.
+See [abstract-lamina-ml-validation-report.pdf]([reports/abstract-lamina-ml-validation.pdf](reports/lamina-ml-validation-abstract.pdf)) for the executive summary and contents of the Lamina ML model validation report. The full report is available on request.
 
 ## Contents
 
