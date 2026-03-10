@@ -80,8 +80,13 @@ def load_client_config_and_setup() -> (
         output_dir (str): Output directory path.
         area (list): Bounding box [N, W, S, E].
     """
-    client_id = input("Enter client ID: ").strip()
-    config_path = os.path.join("configs", "clients", client_id, "config.yaml")
+    parser = argparse.ArgumentParser(description="ERA5 Weather Downloader")
+    parser.add_argument("--client_id", required=True, help="Client ID")
+    parser.add_argument("--data_dir", default="data", help="Base directory for all data files")
+    args, _ = parser.parse_known_args()
+    client_id = args.client_id
+    data_dir = args.data_dir
+    config_path = os.path.join(data_dir, "configs", "clients", client_id, "config.yaml")
     if not os.path.exists(config_path):
         raise FileNotFoundError(f"Config file not found: {config_path}")
 
@@ -99,7 +104,7 @@ def load_client_config_and_setup() -> (
     current_year = datetime.now().year
     years = [str(y) for y in range(install_year, current_year + 1)]
 
-    output_dir = os.path.join("data", client_id, "Raw", "era5_data")
+    output_dir = os.path.join(data_dir, "data", client_id, "Raw", "era5_data")
     os.makedirs(output_dir, exist_ok=True)
 
     lat = config.get("latitude")
@@ -306,25 +311,48 @@ def merge_netcdf_files(
 # MAIN
 # -----------------------
 def main() -> None:
+    logger.info("=== Starting ERA5 Weather Downloader main() ===")
     config, client_id, years, output_dir, area = load_client_config_and_setup()
+    logger.info(f"Loaded config for client_id: {client_id}")
+    logger.info(f"Years to process: {years}")
+    logger.info(f"Output directory: {output_dir}")
+    logger.info(f"Area: {area}")
 
-    # Initialise CDS API client
+    # Check if the final merged file exists (either era5_{years[0]}_{years[-1]}_merged.nc or era5.nc)
+    merged_file = os.path.join(output_dir, f"era5_{years[0]}_{years[-1]}_merged.nc")
+    alt_merged_file = os.path.join(output_dir, "era5.nc")
+    legacy_merged_file = os.path.join(output_dir, "era5_merged.nc")
+    if os.path.exists(merged_file) or os.path.exists(alt_merged_file) or os.path.exists(legacy_merged_file):
+        logger.info(f"Final merged ERA5 file already exists: {merged_file} or {alt_merged_file} or {legacy_merged_file}. Skipping download and merge.")
+        return
+
+    logger.info("Initialising CDS API client...")
     c = cdsapi.Client()
+    logger.info("CDS API client initialised.")
+
     # Check disk space
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--ignore_disk_space_warning", action="store_true", help="Ignore low disk space warning and continue")
+    args, _ = parser.parse_known_args()
+    logger.info("Checking disk space...")
     if not check_disk_space(output_dir, DEFAULT_DISK_GB):
         logger.warning("Warning: Low disk space detected.")
-        response = input("Continue anyway? (y/n): ")
-        if response.lower() != "y":
-            exit()
-    # Download data
+        if not args.ignore_disk_space_warning:
+            logger.error("Aborting due to low disk space. Use --ignore_disk_space_warning to override.")
+            exit(1)
+
+    logger.info("Starting ERA5 data download...")
     download_era5_data(c, output_dir, years, VARIABLES_TIME, area, DATASET)
-    # Summarise files
+    logger.info("Download complete. Summarising NetCDF files...")
     summarise_netcdf_files(output_dir)
+    logger.info("Summary complete. Starting merge of NetCDF files...")
     # Merge files with error handling
     try:
         merge_netcdf_files(output_dir, VAR_MAP, years)
+        logger.info("Merge complete.")
     except Exception as e:
         logger.error(f"Error during merging NetCDF files: {e}")
+    logger.info("=== ERA5 Weather Downloader main() finished ===")
 
 
 if __name__ == "__main__":

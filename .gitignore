@@ -31,3 +31,15 @@ pip-log.txt
 
 # Windows system files
 ehthumbs.db
+
+# Client-specific configs and sensitive data
+etl/configs/clients/
+etl/configs/template_client_config.yaml
+.cdsapirc
+*terraform.tfvars
+*terraform.tfstate*
+
+# Data directories
+data/
+*.nc
+*.csv

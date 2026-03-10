@@ -622,13 +622,14 @@ def run_validation_and_report(df: pd.DataFrame) -> pd.DataFrame:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--client_id", required=True, help="Client identifier")
+    parser.add_argument("--data_dir", default="data", help="Base directory for all data files")
     args = parser.parse_args()
     client_id = args.client_id
 
     try:
         config_filename = f"{client_id}/config.yaml"
-        BASE_DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
-        BASE_CONFIG_DIR = Path(os.getenv("CONFIG_DIR", "configs/clients"))
+        BASE_DATA_DIR = Path(args.data_dir)
+        BASE_CONFIG_DIR = Path(args.data_dir) / "configs" / "clients"
 
         client_config = load_client_config(client_id, BASE_CONFIG_DIR)
         validate_config(client_config, config_filename)

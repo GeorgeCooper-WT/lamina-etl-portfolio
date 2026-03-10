@@ -1,0 +1,16 @@
+# Core scientific and data libraries
+pandas
+numpy
+scipy
+xarray
+pvlib
+pyyaml
+cdsapi
+
+# For NetCDF file handling (xarray covers most, but netCDF4 is common)
+netCDF4
+
+# For Dask parallelization (used by xarray.open_mfdataset)
+dask
+
+gitpython

@@ -8,7 +8,7 @@ Aligns, merges, and disaggregates SCADA (site) and ERA5 weather data for solar a
 - Detailed logging and validation
 
 Usage:
-    python scada_era5_combine.py --client_id myclient --scada_file /path/to/scada.csv --era5_file /path/to/era5.nc
+    python scada_era5_combine.py --client_id myclient --data_dir /path/to/data
 
 Dependencies:
     pandas, xarray, numpy, scipy, pvlib, pyyaml
@@ -32,8 +32,8 @@ logging.basicConfig(
 )
 
 
-def load_client_config(client_id: str) -> dict:
-    config_path = os.path.join("configs", "clients", client_id, "config.yaml")
+def load_client_config(client_id: str, data_dir: str) -> dict:
+    config_path = os.path.join(data_dir, "configs", "clients", client_id, "config.yaml")
     if not os.path.exists(config_path):
         logger.error(f"Config file not found: {config_path}")
         raise FileNotFoundError(f"Config file not found: {config_path}")
@@ -202,7 +202,8 @@ def disaggregate_rainfall(
             n_intervals = len(intervals)
             if n_intervals > 0:
                 rain_intervals = max(1, int(n_intervals * 0.3))
-                rain_indices = np.random.seed(42)(
+                np.random.seed(42)
+                rain_indices = np.random.choice(
                     n_intervals, size=rain_intervals, replace=False
                 )
                 pattern = np.zeros(n_intervals)
@@ -239,7 +240,7 @@ def disaggregate_era5_data(
     for col in ["tp", "ssrd", "ssrdc"]:
         if col in era5_5min.columns:
             original_sum = era5_df[col].sum()
-            disagg_sum = era5_5min[col].resample("1H").sum().sum()
+            disagg_sum = era5_5min[col].resample("1h").sum().sum()
             diff_pct = abs(100 * (disagg_sum - original_sum) / original_sum)
             logger.info(
                 f"{col}: Original sum = {original_sum:.3f}, Disaggregated sum = {disagg_sum:.3f}, Difference = {diff_pct:.2f}%"
@@ -318,32 +319,43 @@ def verify_saved_file(output_filename: str, combined_df: pd.DataFrame) -> None:
 
 
 def main():
+
     parser = argparse.ArgumentParser(
         description="Combine SCADA and ERA5 data for solar analytics."
     )
     parser.add_argument("--client_id", required=True, help="Client ID")
+    parser.add_argument("--data_dir", default="data", help="Base directory for all data files")
     parser.add_argument(
-        "--scada_file", required=True, help="Path to SCADA (site) CSV file"
+        "--scada_file",
+        required=False,
+        help="Path to SCADA (site) CSV file. Default: <data_dir>/data/<client_id>/Processed/scada_master_dataset.csv",
     )
-    parser.add_argument("--era5_file", required=True, help="Path to ERA5 NetCDF file")
+    parser.add_argument(
+        "--era5_file",
+        required=False,
+        help="Path to ERA5 NetCDF file. Default: <data_dir>/data/<client_id>/Raw/era5_data/era5_merged.nc",
+    )
     parser.add_argument(
         "--output_dir",
         default=None,
-        help="Output directory (default: data/<client_id>/processed)",
+        help="Output directory (default: <data_dir>/data/<client_id>/processed)",
     )
     args = parser.parse_args()
 
     client_id = args.client_id
-    scada_file = args.scada_file
-    era5_file = args.era5_file
-    output_dir = args.output_dir or os.path.join("data", client_id, "processed")
+    scada_file = args.scada_file or os.path.join(args.data_dir, "data", client_id, "Processed", "scada_master_dataset.csv")
+    era5_file = args.era5_file or os.path.join(args.data_dir, "data", client_id, "Raw", "era5_data", "era5_merged.nc")
+    # If output_dir is not provided or is an empty string, use the default
+    output_dir = args.output_dir
+    if not output_dir:
+        output_dir = os.path.join(args.data_dir, "data", client_id, "processed")
     os.makedirs(output_dir, exist_ok=True)
     output_filename = f"{client_id}_master_data_set_combined.csv"
     output_path = os.path.join(output_dir, output_filename)
 
-    config = load_client_config(client_id)
+    config = load_client_config(client_id, args.data_dir)
 
-    client_data_dir = os.path.join("data", client_id)
+    client_data_dir = os.path.join(args.data_dir, "data", client_id)
     if not os.path.exists(client_data_dir):
         logger.error(f"Client data directory does not exist: {client_data_dir}")
         exit(1)
@@ -439,7 +451,7 @@ def main():
         logger.warning("Warning: NaN values found:")
         logger.warning(nan_check[nan_check > 0])
 
-    for hour, group in era5_5min["tp"].groupby(era5_5min.index.floor("H")):
+    for hour, group in era5_5min["tp"].groupby(era5_5min.index.floor("h")):
         original = era5_df_aligned.loc[hour, "tp"] * 1000
         disagg_sum = group.sum()
         if not np.isclose(original, disagg_sum, atol=1e-3):
