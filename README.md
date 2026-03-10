@@ -5,11 +5,12 @@ This repository showcases an approach to building secure, scalable, and producti
 ## Contents
 
 ### 1. etl
-Standalone Python scripts demonstrating robust ETL (Extract, Transform, Load) pipelines for solar energy data analytics. Highlights include:
-- Data validation and configuration
-- Weather data ingestion and alignment
-- Data merging and transformation
-- Batch writing to InfluxDB
+Production-ready, containerised Python ETL pipeline for solar energy data analytics. Highlights include:
+- Docker containerisation for reproducible deployments
+- Orchestrated pipeline with flexible configuration
+- Weather data ingestion and temporal alignment
+- Data validation, transformation, and merging
+- Batch writing to InfluxDB with retry logic
 
 See [etl/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/etl/README.md) for details.
 
