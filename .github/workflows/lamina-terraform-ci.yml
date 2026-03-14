@@ -1,0 +1,48 @@
+name: Terraform CI
+
+# 1. THE TRIGGER: Only run if Terraform files are changed
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'terraform/**' 
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'terraform/**'
+
+jobs:
+  terraform-checks:
+    runs-on: ubuntu-latest
+    
+    # Set the default folder for all run commands
+    defaults:
+      run:
+        working-directory: ./terraform 
+
+    steps:
+      # Step 1: Fetch code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install HashiCorp Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # Step 3: Check formatting
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      # Step 4: Initialize (Crucial: -backend=false prevents it from needing AWS credentials right now)
+      - name: Terraform Init
+        run: terraform init -backend=false
+
+      # Step 5: Check for logical and syntax errors
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Step 6: Run a Security Scan
+      - name: Run tfsec Security Scanner
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          working_directory: ./terraform
