@@ -11,16 +11,16 @@ output "kms_key_arn" {
 output "secrets_arns" {
   description = "Map of all secret ARNs"
   value = {
-    supabase_url         = aws_secretsmanager_secret.supabase_url.arn
-    supabase_anon_key    = aws_secretsmanager_secret.supabase_anon_key.arn
-    supabase_service_key = aws_secretsmanager_secret.supabase_service_key.arn
-    influxdb_url         = aws_secretsmanager_secret.influxdb_url.arn
-    influxdb_token       = aws_secretsmanager_secret.influxdb_token.arn
-    influxdb_org         = aws_secretsmanager_secret.influxdb_org.arn
-    raw_data_bucket_name         = aws_secretsmanager_secret.raw_data_bucket_name.arn
-    processed_data_bucket_name   = aws_secretsmanager_secret.processed_data_bucket_name.arn
-    reports_bucket_name          = aws_secretsmanager_secret.reports_bucket_name.arn
-    lambda_folder_creation_url   = aws_secretsmanager_secret.lambda_folder_creation_url.arn
+    supabase_url               = aws_secretsmanager_secret.supabase_url.arn
+    supabase_anon_key          = aws_secretsmanager_secret.supabase_anon_key.arn
+    supabase_service_key       = aws_secretsmanager_secret.supabase_service_key.arn
+    influxdb_url               = aws_secretsmanager_secret.influxdb_url.arn
+    influxdb_token             = aws_secretsmanager_secret.influxdb_token.arn
+    influxdb_org               = aws_secretsmanager_secret.influxdb_org.arn
+    raw_data_bucket_name       = aws_secretsmanager_secret.raw_data_bucket_name.arn
+    processed_data_bucket_name = aws_secretsmanager_secret.processed_data_bucket_name.arn
+    reports_bucket_name        = aws_secretsmanager_secret.reports_bucket_name.arn
+    lambda_folder_creation_url = aws_secretsmanager_secret.lambda_folder_creation_url.arn
   }
 }
 

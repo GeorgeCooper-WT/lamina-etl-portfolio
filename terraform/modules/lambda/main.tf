@@ -10,14 +10,14 @@ resource "aws_lambda_function" "client_setup" {
   runtime       = var.runtime
   role          = var.role_arn
 
-  filename      = data.archive_file.lambda_zip.output_path
+  filename = data.archive_file.lambda_zip.output_path
 
   environment {
     variables = var.environment_variables
   }
 
-  timeout      = 30
-  memory_size  = 128
+  timeout     = 30
+  memory_size = 128
 }
 
 # API Gateway REST API
@@ -43,12 +43,12 @@ resource "aws_api_gateway_method" "client_setup" {
 
 # API Gateway Integration (Lambda)
 resource "aws_api_gateway_integration" "client_setup" {
-  rest_api_id = aws_api_gateway_rest_api.client_setup.id
-  resource_id = aws_api_gateway_resource.client_setup.id
-  http_method = aws_api_gateway_method.client_setup.http_method
+  rest_api_id             = aws_api_gateway_rest_api.client_setup.id
+  resource_id             = aws_api_gateway_resource.client_setup.id
+  http_method             = aws_api_gateway_method.client_setup.http_method
   integration_http_method = "POST"
-  type        = "AWS_PROXY"
-  uri         = aws_lambda_function.client_setup.invoke_arn
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.client_setup.invoke_arn
 }
 
 # Lambda permission for API Gateway
@@ -62,7 +62,7 @@ resource "aws_lambda_permission" "apigw" {
 
 # API Gateway Deployment
 resource "aws_api_gateway_deployment" "client_setup" {
-  depends_on = [aws_api_gateway_integration.client_setup]
+  depends_on  = [aws_api_gateway_integration.client_setup]
   rest_api_id = aws_api_gateway_rest_api.client_setup.id
 }
 

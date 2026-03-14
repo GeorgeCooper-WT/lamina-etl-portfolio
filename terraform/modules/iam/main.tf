@@ -1,7 +1,7 @@
 # IAM Role for Lambda Functions (ETL, Data Processing)
 resource "aws_iam_role" "lambda_execution" {
   name = "${var.project_name}-lambda-execution-${var.environment}"
-  
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -12,7 +12,7 @@ resource "aws_iam_role" "lambda_execution" {
       }
     }]
   })
-  
+
   tags = {
     Name = "${var.project_name}-lambda-role"
   }
@@ -22,7 +22,7 @@ resource "aws_iam_role" "lambda_execution" {
 resource "aws_iam_policy" "lambda_s3_access" {
   name        = "${var.project_name}-lambda-s3-access-${var.environment}"
   description = "Allow Lambda to read/write data lake buckets"
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -51,7 +51,7 @@ resource "aws_iam_policy" "lambda_s3_access" {
 resource "aws_iam_policy" "lambda_secrets_access" {
   name        = "${var.project_name}-lambda-secrets-access-${var.environment}"
   description = "Allow Lambda to read secrets from Secrets Manager"
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -89,7 +89,7 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
 # IAM Role for Glue (ETL Jobs)
 resource "aws_iam_role" "glue_execution" {
   name = "${var.project_name}-glue-execution-${var.environment}"
-  
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -100,7 +100,7 @@ resource "aws_iam_role" "glue_execution" {
       }
     }]
   })
-  
+
   tags = {
     Name = "${var.project_name}-glue-role"
   }
@@ -120,7 +120,7 @@ resource "aws_iam_role_policy_attachment" "glue_s3" {
 # IAM Role for EC2 (if self-hosting InfluxDB)
 resource "aws_iam_role" "ec2_data_access" {
   name = "${var.project_name}-ec2-data-access-${var.environment}"
-  
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -131,7 +131,7 @@ resource "aws_iam_role" "ec2_data_access" {
       }
     }]
   })
-  
+
   tags = {
     Name = "${var.project_name}-ec2-role"
   }
@@ -152,7 +152,7 @@ resource "aws_iam_role_policy_attachment" "ec2_secrets" {
 resource "aws_iam_policy" "ec2_s3_read" {
   name        = "${var.project_name}-ec2-s3-read-${var.environment}"
   description = "Allow EC2 to read processed data"
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [

@@ -3,7 +3,7 @@ resource "aws_kms_key" "secrets" {
   description             = "${var.project_name}-${var.environment}-secrets-key"
   deletion_window_in_days = 10
   enable_key_rotation     = true
-  
+
   tags = {
     Name = "${var.project_name}-secrets-key"
   }
@@ -19,7 +19,7 @@ resource "aws_secretsmanager_secret" "supabase_url" {
   name        = "${var.project_name}/${var.environment}/supabase/url"
   description = "Supabase project URL"
   kms_key_id  = aws_kms_key.secrets.id
-  
+
   tags = {
     Service = "Supabase"
   }
@@ -35,7 +35,7 @@ resource "aws_secretsmanager_secret" "supabase_anon_key" {
   name        = "${var.project_name}/${var.environment}/supabase/anon-key"
   description = "Supabase anonymous key"
   kms_key_id  = aws_kms_key.secrets.id
-  
+
   tags = {
     Service = "Supabase"
   }
@@ -51,7 +51,7 @@ resource "aws_secretsmanager_secret" "supabase_service_key" {
   name        = "${var.project_name}/${var.environment}/supabase/service-key"
   description = "Supabase service role key"
   kms_key_id  = aws_kms_key.secrets.id
-  
+
   tags = {
     Service = "Supabase"
   }
@@ -67,7 +67,7 @@ resource "aws_secretsmanager_secret" "influxdb_url" {
   name        = "${var.project_name}/${var.environment}/influxdb/url"
   description = "InfluxDB server URL"
   kms_key_id  = aws_kms_key.secrets.id
-  
+
   tags = {
     Service = "InfluxDB"
   }
@@ -83,7 +83,7 @@ resource "aws_secretsmanager_secret" "influxdb_token" {
   name        = "${var.project_name}/${var.environment}/influxdb/token"
   description = "InfluxDB authentication token"
   kms_key_id  = aws_kms_key.secrets.id
-  
+
   tags = {
     Service = "InfluxDB"
   }
@@ -99,7 +99,7 @@ resource "aws_secretsmanager_secret" "influxdb_org" {
   name        = "${var.project_name}/${var.environment}/influxdb/org"
   description = "InfluxDB organization name"
   kms_key_id  = aws_kms_key.secrets.id
-  
+
   tags = {
     Service = "InfluxDB"
   }

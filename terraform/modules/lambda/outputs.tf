@@ -10,5 +10,5 @@ output "lambda_function_arn" {
 
 output "api_gateway_url" {
   description = "API Gateway endpoint for client folder creation Lambda"
-  value = "https://${aws_api_gateway_rest_api.client_setup.id}.execute-api.${var.aws_region}.amazonaws.com/${aws_api_gateway_stage.client_setup.stage_name}/client-setup"
+  value       = "https://${aws_api_gateway_rest_api.client_setup.id}.execute-api.${var.aws_region}.amazonaws.com/${aws_api_gateway_stage.client_setup.stage_name}/client-setup"
 }
