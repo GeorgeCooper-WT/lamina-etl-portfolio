@@ -324,7 +324,9 @@ def main():
         description="Combine SCADA and ERA5 data for solar analytics."
     )
     parser.add_argument("--client_id", required=True, help="Client ID")
-    parser.add_argument("--data_dir", default="data", help="Base directory for all data files")
+    parser.add_argument(
+        "--data_dir", default="data", help="Base directory for all data files"
+    )
     parser.add_argument(
         "--scada_file",
         required=False,
@@ -343,8 +345,12 @@ def main():
     args = parser.parse_args()
 
     client_id = args.client_id
-    scada_file = args.scada_file or os.path.join(args.data_dir, "data", client_id, "Processed", "scada_master_dataset.csv")
-    era5_file = args.era5_file or os.path.join(args.data_dir, "data", client_id, "Raw", "era5_data", "era5_merged.nc")
+    scada_file = args.scada_file or os.path.join(
+        args.data_dir, "data", client_id, "Processed", "scada_master_dataset.csv"
+    )
+    era5_file = args.era5_file or os.path.join(
+        args.data_dir, "data", client_id, "Raw", "era5_data", "era5_merged.nc"
+    )
     # If output_dir is not provided or is an empty string, use the default
     output_dir = args.output_dir
     if not output_dir:

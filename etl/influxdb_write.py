@@ -130,7 +130,9 @@ def filter_valid_solar(scored: pd.DataFrame) -> pd.DataFrame:
     return scored[valid_solar_mask].copy()
 
 
-def get_existing_columns(scored: pd.DataFrame, columns_to_write: List[str]) -> List[str]:
+def get_existing_columns(
+    scored: pd.DataFrame, columns_to_write: List[str]
+) -> List[str]:
     """
     Return only columns that exist in the DataFrame.
 

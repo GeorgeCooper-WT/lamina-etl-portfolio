@@ -82,7 +82,9 @@ def load_client_config_and_setup() -> (
     """
     parser = argparse.ArgumentParser(description="ERA5 Weather Downloader")
     parser.add_argument("--client_id", required=True, help="Client ID")
-    parser.add_argument("--data_dir", default="data", help="Base directory for all data files")
+    parser.add_argument(
+        "--data_dir", default="data", help="Base directory for all data files"
+    )
     args, _ = parser.parse_known_args()
     client_id = args.client_id
     data_dir = args.data_dir
@@ -322,8 +324,14 @@ def main() -> None:
     merged_file = os.path.join(output_dir, f"era5_{years[0]}_{years[-1]}_merged.nc")
     alt_merged_file = os.path.join(output_dir, "era5.nc")
     legacy_merged_file = os.path.join(output_dir, "era5_merged.nc")
-    if os.path.exists(merged_file) or os.path.exists(alt_merged_file) or os.path.exists(legacy_merged_file):
-        logger.info(f"Final merged ERA5 file already exists: {merged_file} or {alt_merged_file} or {legacy_merged_file}. Skipping download and merge.")
+    if (
+        os.path.exists(merged_file)
+        or os.path.exists(alt_merged_file)
+        or os.path.exists(legacy_merged_file)
+    ):
+        logger.info(
+            f"Final merged ERA5 file already exists: {merged_file} or {alt_merged_file} or {legacy_merged_file}. Skipping download and merge."
+        )
         return
 
     logger.info("Initialising CDS API client...")
@@ -332,13 +340,19 @@ def main() -> None:
 
     # Check disk space
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ignore_disk_space_warning", action="store_true", help="Ignore low disk space warning and continue")
+    parser.add_argument(
+        "--ignore_disk_space_warning",
+        action="store_true",
+        help="Ignore low disk space warning and continue",
+    )
     args, _ = parser.parse_known_args()
     logger.info("Checking disk space...")
     if not check_disk_space(output_dir, DEFAULT_DISK_GB):
         logger.warning("Warning: Low disk space detected.")
         if not args.ignore_disk_space_warning:
-            logger.error("Aborting due to low disk space. Use --ignore_disk_space_warning to override.")
+            logger.error(
+                "Aborting due to low disk space. Use --ignore_disk_space_warning to override."
+            )
             exit(1)
 
     logger.info("Starting ERA5 data download...")

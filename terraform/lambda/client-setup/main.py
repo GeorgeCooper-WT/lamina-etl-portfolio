@@ -65,7 +65,9 @@ def lambda_handler(event, context):
             return {
                 "statusCode": 400,
                 "headers": {"Content-Type": "application/json"},
-                "body": json.dumps({"error": f"Missing required fields: {', '.join(missing)}"}),
+                "body": json.dumps(
+                    {"error": f"Missing required fields: {', '.join(missing)}"}
+                ),
             }
 
     except Exception as e:

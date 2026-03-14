@@ -324,8 +324,11 @@ def assign_panel_config(df, panel_config):
 
     # After last change for String 2
     last_change = max(
-        pd.Timestamp(period["start"]).tz_localize("UTC") if pd.Timestamp(period["start"]).tzinfo is None
-        else pd.Timestamp(period["start"]).tz_convert("UTC")
+        (
+            pd.Timestamp(period["start"]).tz_localize("UTC")
+            if pd.Timestamp(period["start"]).tzinfo is None
+            else pd.Timestamp(period["start"]).tz_convert("UTC")
+        )
         for period in panel_config
         if period["start"]
     )
@@ -622,7 +625,9 @@ def run_validation_and_report(df: pd.DataFrame) -> pd.DataFrame:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--client_id", required=True, help="Client identifier")
-    parser.add_argument("--data_dir", default="data", help="Base directory for all data files")
+    parser.add_argument(
+        "--data_dir", default="data", help="Base directory for all data files"
+    )
     args = parser.parse_args()
     client_id = args.client_id
 
