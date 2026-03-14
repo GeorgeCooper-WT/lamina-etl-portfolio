@@ -1,13 +1,19 @@
 name: ETL Pipeline CI
 
-# 1. Action Trigger
+# 1. Action Trigger: Only run if files in the etl folder or if this YAML file change
 on:
   push:
     branches:
       - main
+    paths:
+      - 'etl/**'
+      - '.github/workflows/etl-pipeline.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - 'etl/**'
+      - '.github/workflows/etl-pipeline.yml'
 
 # 2. Action
 jobs:
