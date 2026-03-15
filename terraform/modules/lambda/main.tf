@@ -70,6 +70,7 @@ resource "aws_api_gateway_deployment" "client_setup" {
 }
 
 # CloudWatch Log Group for API Gateway
+#tfsec:ignore:aws-cloudwatch-log-group-customer-key Reason: Default CloudWatch encryption is sufficient for portfolio project; customer-managed keys add unnecessary complexity and cost
 resource "aws_cloudwatch_log_group" "api_gateway" {
   name              = "/aws/apigateway/${var.function_name}-api"
   retention_in_days = 7
@@ -116,7 +117,10 @@ resource "aws_iam_role_policy" "api_gateway_cloudwatch" {
           "logs:GetLogEvents",
           "logs:FilterLogEvents"
         ]
-        Resource = "*"
+        Resource = [
+          aws_cloudwatch_log_group.api_gateway.arn,
+          "${aws_cloudwatch_log_group.api_gateway.arn}:*"
+        ]
       }
     ]
   })
