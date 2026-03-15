@@ -52,7 +52,8 @@ module "secrets" {
   raw_data_bucket_name       = module.data_lake.raw_data_bucket_name
   processed_data_bucket_name = module.data_lake.processed_data_bucket_name
   reports_bucket_name        = module.data_lake.reports_bucket_name
-  lambda_folder_creation_url = module.client_setup_lambda.api_gateway_url # Update this output name if needed
+  lambda_folder_creation_url = module.client_setup_lambda.api_gateway_url
+  lambda_api_key             = module.client_setup_lambda.api_key_value
 }
 
 # IAM Roles Module

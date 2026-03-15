@@ -65,3 +65,10 @@ variable "lambda_folder_creation_url" {
   description = "API Gateway endpoint for client folder creation Lambda"
   type        = string
 }
+
+# API Key for Lambda endpoint
+variable "lambda_api_key" {
+  description = "API Gateway API Key for client folder creation Lambda"
+  type        = string
+  sensitive   = true
+}

@@ -170,3 +170,18 @@ resource "aws_secretsmanager_secret_version" "lambda_folder_creation_url" {
   secret_id     = aws_secretsmanager_secret.lambda_folder_creation_url.id
   secret_string = var.lambda_folder_creation_url
 }
+
+# Lambda API Key as secret
+resource "aws_secretsmanager_secret" "lambda_api_key" {
+  name        = "${var.project_name}/${var.environment}/lambda_api_key"
+  description = "API Gateway API Key for client folder creation Lambda"
+  kms_key_id  = aws_kms_key.secrets.id
+  tags = {
+    Service = "Lambda"
+  }
+}
+
+resource "aws_secretsmanager_secret_version" "lambda_api_key" {
+  secret_id     = aws_secretsmanager_secret.lambda_api_key.id
+  secret_string = var.lambda_api_key
+}

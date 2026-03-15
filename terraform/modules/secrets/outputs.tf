@@ -21,6 +21,7 @@ output "secrets_arns" {
     processed_data_bucket_name = aws_secretsmanager_secret.processed_data_bucket_name.arn
     reports_bucket_name        = aws_secretsmanager_secret.reports_bucket_name.arn
     lambda_folder_creation_url = aws_secretsmanager_secret.lambda_folder_creation_url.arn
+    lambda_api_key             = aws_secretsmanager_secret.lambda_api_key.arn
   }
 }
 
@@ -32,4 +33,9 @@ output "supabase_url_secret_name" {
 output "influxdb_token_secret_name" {
   description = "Name of InfluxDB token secret"
   value       = aws_secretsmanager_secret.influxdb_token.name
+}
+
+output "lambda_api_key_secret_name" {
+  description = "Name of Lambda API Key secret"
+  value       = aws_secretsmanager_secret.lambda_api_key.name
 }

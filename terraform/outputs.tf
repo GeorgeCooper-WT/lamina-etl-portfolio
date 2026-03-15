@@ -23,3 +23,13 @@ output "secrets_manager_arns" {
   value       = module.secrets.secrets_arns
   sensitive   = true
 }
+
+output "client_setup_api_url" {
+  description = "API Gateway URL for client setup Lambda"
+  value       = module.client_setup_lambda.api_gateway_url
+}
+
+output "client_setup_api_key_secret_name" {
+  description = "AWS Secrets Manager secret name containing the API key for client setup Lambda"
+  value       = module.secrets.lambda_api_key_secret_name
+}

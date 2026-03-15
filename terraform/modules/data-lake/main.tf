@@ -1,4 +1,5 @@
 # S3 Bucket for Raw Data
+#tfsec:ignore:aws-s3-enable-bucket-logging Reason: Bucket access logging not required for portfolio project to minimize costs
 resource "aws_s3_bucket" "raw_data" {
   bucket = "${var.project_name}-raw-data-${var.environment}"
 
@@ -10,6 +11,7 @@ resource "aws_s3_bucket" "raw_data" {
 }
 
 # S3 Bucket for Processed Data
+#tfsec:ignore:aws-s3-enable-bucket-logging Reason: Bucket access logging not required for portfolio project to minimize costs
 resource "aws_s3_bucket" "processed_data" {
   bucket = "${var.project_name}-processed-data-${var.environment}"
 
@@ -21,6 +23,7 @@ resource "aws_s3_bucket" "processed_data" {
 }
 
 # S3 Bucket for Reports
+#tfsec:ignore:aws-s3-enable-bucket-logging Reason: Bucket access logging not required for portfolio project to minimize costs
 resource "aws_s3_bucket" "reports" {
   bucket = "${var.project_name}-reports-${var.environment}"
 
@@ -57,6 +60,7 @@ resource "aws_s3_bucket_versioning" "reports_versioning" {
 }
 
 # Server-side encryption (AES-256)
+#tfsec:ignore:aws-s3-encryption-customer-key Reason: AWS-managed AES256 encryption is sufficient for portfolio project; customer-managed keys add unnecessary complexity
 resource "aws_s3_bucket_server_side_encryption_configuration" "raw_encryption" {
   bucket = aws_s3_bucket.raw_data.id
 
@@ -67,6 +71,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "raw_encryption" {
   }
 }
 
+#tfsec:ignore:aws-s3-encryption-customer-key Reason: AWS-managed AES256 encryption is sufficient for portfolio project; customer-managed keys add unnecessary complexity
 resource "aws_s3_bucket_server_side_encryption_configuration" "processed_encryption" {
   bucket = aws_s3_bucket.processed_data.id
 
@@ -77,6 +82,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "processed_encrypt
   }
 }
 
+#tfsec:ignore:aws-s3-encryption-customer-key Reason: AWS-managed AES256 encryption is sufficient for portfolio project; customer-managed keys add unnecessary complexity
 resource "aws_s3_bucket_server_side_encryption_configuration" "reports_encryption" {
   bucket = aws_s3_bucket.reports.id
 
