@@ -1,0 +1,44 @@
+name: Global Security Audit
+
+# 1. THE TRIGGER: Runs on every push, of every folder.
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Run a scheduled audit every Sunday at midnight
+  schedule:
+    - cron: '0 0 * * 0' 
+
+jobs:
+  # JOB 1: Search for leaked passwords and API keys
+  secret-scanning:
+    name: Gitleaks Secret Scanner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Tells GitHub to download entire commit history, not just the latest push.
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub provides token automatically
+
+  # JOB 2: Search for outdated, vulnerable Python packages or Docker base images
+  dependency-scanning:
+    name: Trivy Vulnerability Scanner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs' # Scans the entire file system
+          ignore-unfixed: true # Only flags if there is a fix available
+          format: 'table'
+          severity: 'CRITICAL,HIGH' # Ignores low-level theoretical risks
+          exit-code: '1'  # Fail the build if vulnerabilities found

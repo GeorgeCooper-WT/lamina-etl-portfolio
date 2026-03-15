@@ -7,13 +7,13 @@ on:
       - main
     paths:
       - 'etl/**'
-      - '.github/workflows/etl-pipeline.yml'
+      - '.github/workflows/lamina-etl-ci.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'etl/**'
-      - '.github/workflows/etl-pipeline.yml'
+      - '.github/workflows/lamina-etl-ci.yml'
 
 # 2. Action
 jobs:
@@ -46,3 +46,12 @@ jobs:
       # Step 4: Prove the Docker container builds correctly
       - name: Test Docker Build
         run: docker build -t lamina-etl:test ./etl
+
+      # Step 5: Scan Docker image for vulnerabilities
+      - name: Scan Docker Image
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'image'
+          image-ref: 'lamina-etl:test'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
