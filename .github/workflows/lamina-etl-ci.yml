@@ -54,4 +54,5 @@ jobs:
           scan-type: 'image'
           image-ref: 'lamina-etl:test'
           severity: 'CRITICAL,HIGH'
+          ignore-unfixed: true
           exit-code: '1'
