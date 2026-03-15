@@ -99,6 +99,7 @@ resource "aws_iam_role" "api_gateway_cloudwatch" {
 }
 
 # IAM Policy for API Gateway to write logs
+#tfsec:ignore:aws-iam-no-policy-wildcards Reason: Wildcard suffix (:*) is required to allow API Gateway to create and write to log streams within the specific log group
 resource "aws_iam_role_policy" "api_gateway_cloudwatch" {
   name = "${var.function_name}-api-gateway-cloudwatch-policy"
   role = aws_iam_role.api_gateway_cloudwatch.id
