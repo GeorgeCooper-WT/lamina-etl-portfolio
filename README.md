@@ -3,6 +3,9 @@
 
 This repository showcases an approach to building secure, scalable, and production-ready data solutions for the Lamina Energy solar analytics platform.
 
+![Lamina Forensic Portal Mockup](assets/lamina-streamlit-app-demo.png)
+*UI Concept: Integrated Forensic Portal for Fleet Overview & Degradation Analysis.*
+
 **Model Validation Report Abstract:**
 See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pdf) for the executive summary and contents of the Lamina ML model validation report. The full report is available on request.
 
