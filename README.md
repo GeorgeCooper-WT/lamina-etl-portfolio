@@ -11,9 +11,11 @@ See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pd
 
 <br>
 
-![Lamina Forensic Portal Demo](assets/lamina-streamlit-app-demo.png)
-<br> 
-*UI Demo: Integrated Forensic Portal for Portfolio Overview & Site Performance Analysis.*
+<p align="center">
+  <img src="assets/lamina-streamlit-app-demo.png" width="90%" alt="Lamina Forensic Portal Demo">
+  <br>
+  <em>UI Demo: Integrated Forensic Portal for Portfolio Overview & Site Performance Analysis.</em>
+</p>
 
 <br>
 
