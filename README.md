@@ -21,7 +21,7 @@ See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pd
 
 ## System Architecture
 
-### 1. Data Engineering & ETL [```/etl```]
+### 1. Data Engineering & ETL ```/etl```
 Production-ready, containerised Python ETL pipeline for solar energy data analytics. Highlights include:
 - Docker containerisation for reproducible deployments
 - Orchestrated pipeline with flexible configuration
@@ -33,7 +33,7 @@ See [etl/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob
 
 <br>
 
-### 2. Infrastructure as Code [```/terraform```]
+### 2. Infrastructure as Code ```/terraform```
 Terraform infrastructure-as-code for a scalable AWS data lake architecture. Features include:
 - Multi-bucket S3 structure for raw, processed, and report data
 - Lifecycle and cost optimisation policies
