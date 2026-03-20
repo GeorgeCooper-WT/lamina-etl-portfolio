@@ -9,13 +9,13 @@ Validated over 2,742 days of 5-minute SCADA telemetry, the Lamina Hybrid Engine 
 **Model Validation Report Abstract:** <br>
 See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pdf) for the executive summary and contents of the Lamina ML model validation report. The full report is available on request.
 
-<br>
+<br><br>
 
 ![Lamina Forensic Portal Demo](assets/lamina-streamlit-app-demo.png)
 <br> 
 *UI Demo: Integrated Forensic Portal for Portfolio Overview & Site Performance Analysis.*
 
-<br>
+<br><br>
 
 ## System Architecture
 
@@ -28,6 +28,8 @@ Production-ready, containerised Python ETL pipeline for solar energy data analyt
 - Batch writing to InfluxDB with retry logic
 
 See [etl/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/etl/README.md) for details.
+
+<br>
 
 ### 2. Infrastructure as Code [```/terraform```]
 Terraform infrastructure-as-code for a scalable AWS data lake architecture. Features include:
@@ -49,6 +51,8 @@ terraform/
 ```
 
 See [terraform/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/terraform/README.md) for details.
+
+<br>
 
 ---
 
