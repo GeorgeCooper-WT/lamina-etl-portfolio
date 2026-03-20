@@ -1,17 +1,25 @@
 # Lamina Portfolio
 
 
-This repository showcases an approach to building secure, scalable, and production-ready data solutions for the Lamina Energy solar analytics platform.
+This repository showcases the MLOps framework used for building a secure and scalable data solution within the Lamina Energy analytics platform.
+
+**Validation:** <br>
+Validated over 2,742 days of 5-minute SCADA telemetry, the Lamina Hybrid Engine identified rising asset degradation trends up to 3 years prior to failure, isolated recoverable revenue losses and OpEx optimisation opportunities.
+
+**Model Validation Report Abstract:** <br>
+See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pdf) for the executive summary and contents of the Lamina ML model validation report. <br> The full report is available on request.
+
+<br>
 
 ![Lamina Forensic Portal Demo](assets/lamina-streamlit-app-demo.png)
+<br> 
 *UI Demo: Integrated Forensic Portal for Portfolio Overview & Site Performance Analysis.*
 
-**Model Validation Report Abstract:**
-See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pdf) for the executive summary and contents of the Lamina ML model validation report. The full report is available on request.
+<br>
 
-## Contents
+## System Architecture
 
-### 1. etl
+### 1. Data Engineering & ETL [```/etl```]
 Production-ready, containerised Python ETL pipeline for solar energy data analytics. Highlights include:
 - Docker containerisation for reproducible deployments
 - Orchestrated pipeline with flexible configuration
@@ -21,7 +29,7 @@ Production-ready, containerised Python ETL pipeline for solar energy data analyt
 
 See [etl/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/etl/README.md) for details.
 
-### 2. terraform
+### 2. Infrastructure as Code [```/terraform```]
 Terraform infrastructure-as-code for a scalable AWS data lake architecture. Features include:
 - Multi-bucket S3 structure for raw, processed, and report data
 - Lifecycle and cost optimisation policies
