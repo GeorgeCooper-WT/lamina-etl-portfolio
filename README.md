@@ -24,6 +24,17 @@ Terraform infrastructure-as-code for a scalable AWS data lake architecture. Feat
 - Lifecycle and cost optimisation policies
 - Secure IAM, encryption, and secrets management
 
+terraform/
+├── main.tf           # Root orchestration
+├── variables.tf      # Global configuration
+├── outputs.tf        # Global outputs
+├── lambda/           # Source code for AWS Lambda functions
+└── modules/          # Encapsulated, reusable infrastructure
+    ├── data-lake/    # S3 Tiering & Lifecycle policies
+    ├── iam/          # Least-privilege role definitions
+    ├── secrets/      # AWS Secrets Manager integration
+    └── lambda/       # Infrastructure definitions for compute
+
 See [terraform/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/terraform/README.md) for details.
 
 ---
