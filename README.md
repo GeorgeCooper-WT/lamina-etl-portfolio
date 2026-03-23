@@ -1,4 +1,4 @@
-# Lamina Portfolio
+# Lamina Intelligence: Forensic Solar Analytics
 
 
 This repository showcases the MLOps framework used for building a secure and scalable data solution within the Lamina Energy analytics platform.
@@ -53,6 +53,33 @@ terraform/
 ```
 
 See [terraform/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfolio/blob/main/terraform/README.md) for details.
+
+<br>
+
+### 3. ML Model & Analytics
+*Note: The core ML modeling codebase is proprietary and has been omitted from this public repository. This section outlines the technical framework and validation methodology.*
+
+<br>
+
+**Tech Stack:** 
+<br>Python (XGBoost, Scikit-learn, NumPy, Pandas, SHAP)
+
+**Physics Modelling:** 
+<br>Baseline performance modelled using PVLib to integrate theoretical physical constraints e.g. clear-sky and diffuse irradiance curves.
+
+**Decomposition Logic:** 
+<br>Utilises a hybrid approach to separate reversible losses (soiling/shading) correlations from irreversible degradation trend-lines.
+
+
+**Technical Highlights:**
+- Benchmarked against 8 years of high-fidelity meteorological data with a baseline fidelity of 98.7% R<sup>2</sup>
+- String-level drift-detected signatures of degradation up to 3 years prior to failure utilising rolling volatility analysis of the Performance Index (PI)
+- Leverages the RMSE delta (0.11 vs 0.25) between filtered and unfiltered datasets as a mathematical poxy for recoverable yield loss
+- Validated via 5-fold rolling-origin cross-validation to maintain temporal integrity and prevent data leakage.
+
+<br>
+
+*Detailed validation report available upon request. See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pdf) for the executive summary.*
 
 <br>
 
