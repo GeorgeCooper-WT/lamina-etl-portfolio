@@ -73,8 +73,8 @@ See [terraform/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfoli
 
 **Technical Highlights:**
 - Benchmarked against 8 years of high-fidelity meteorological data with a baseline fidelity of 98.7% R<sup>2</sup>
-- String-level drift-detected signatures of degradation up to 3 years prior to failure utilising rolling volatility analysis of the Performance Index (PI)
-- Leverages the RMSE delta (0.11 vs 0.25) between filtered and unfiltered datasets as a mathematical poxy for recoverable yield loss
+- Identified string-level signatures of degradation up to 3 years prior to failure utilising rolling volatility analysis of the Performance Index (PI)
+- Leverages the RMSE delta (0.11 vs 0.25) between filtered and unfiltered datasets as a mathematical proxy for recoverable yield loss
 - Validated via 5-fold rolling-origin cross-validation to maintain temporal integrity and prevent data leakage.
 
 <br>
