@@ -1,8 +1,16 @@
 """
 Evaluates the accuracy of the LLM parser output against a manually verified ground truth JSON.
 
+Compares the latest parser output for a given project against a manually verified ground truth,
+reporting field-level error counts and error percentage using recursive leaf-node diffing.
+
 Usage:
-    python tests/parser_eval.py
+    python tests/parser_eval.py <project> <ground_truth>
+
+Arguments:
+    project         Project folder name under db/
+    ground_truth    Path to manually verified ground truth JSON
+
 Requires: deepdiff
 """
 
@@ -15,6 +23,7 @@ from pathlib import Path
 
 from deepdiff import DeepDiff
 import pprint
+import argparse
 
 logging.basicConfig(
     level=logging.INFO,
@@ -22,17 +31,6 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger(__name__)
-
-# ---------------------------------------------------------------------------
-# Paths
-# ---------------------------------------------------------------------------
-_ROOT = Path(__file__).resolve().parent.parent
-EXPECTED_FILE = "tests/ground_truth/virchow_1mwp_expected.json"
-ACTUAL_FILE = sorted(
-    (_ROOT / "db" / "virchow_1mwp_solar_array" / "json").glob(
-        "*virchow_1mwp_solar_array_sld_parse_2026-04-09T10-43-03*.json"
-    )
-)[-1]
 
 
 # ---------------------------------------------------------------------------
@@ -143,5 +141,23 @@ def evaluate_llm_output(ground_truth_path: str, llm_output_path: str) -> None:
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Evaluate LLM parser output against a ground truth JSON."
+    )
+    parser.add_argument("project", help="Project folder name under db/")
+    parser.add_argument("ground_truth", help="Path to ground truth JSON")
+    args = parser.parse_args()
+
+    _ROOT = Path(__file__).resolve().parent.parent
+    output_files = sorted((_ROOT / "db" / args.project / "json").glob("*.json"))
+
+    if not output_files:
+        logger.error(f"No JSON output files found for project: {args.project}")
+        sys.exit(1)
+
+    evaluate_llm_output(args.ground_truth, str(output_files[-1]))
+
+
 if __name__ == "__main__":
-    evaluate_llm_output(EXPECTED_FILE, str(ACTUAL_FILE))
+    main()
