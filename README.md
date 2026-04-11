@@ -1,7 +1,6 @@
 # Lamina Intelligence: Forensic Solar Analytics
 
-
-This repository showcases the MLOps framework used for building a secure and scalable data solution within the Lamina Energy analytics platform.
+This repository showcases the engineering framework behind the Lamina Intelligence platform, covering data infrastructure, ML methodology, and applied LLM/VLM tooling.
 
 **Validation:** <br>
 Validated over 2,742 days of 5-minute SCADA telemetry, the Lamina Hybrid Engine identified rising asset degradation trends up to 3 years prior to failure, isolated recoverable revenue losses and OpEx optimisation opportunities.
@@ -75,11 +74,41 @@ See [terraform/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfoli
 - Benchmarked against 8 years of high-fidelity meteorological data with a baseline fidelity of 98.7% R<sup>2</sup>
 - Identified string-level signatures of degradation up to 3 years prior to failure utilising rolling volatility analysis of the Performance Index (PI)
 - Leverages the RMSE delta (0.11 vs 0.25) between filtered and unfiltered datasets as a mathematical proxy for recoverable yield loss
-- Validated via 5-fold rolling-origin cross-validation to maintain temporal integrity and prevent data leakage.
+- Validated via 5-fold rolling-origin cross-validation to maintain temporal integrity and prevent data leakage
 
 <br>
 
 *Detailed validation report available upon request. See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pdf) for the executive summary.*
+
+<br>
+
+### 4. Document Intelligence & Site Configuration ```/vlm_parser```
+
+*Note: Work in progress. Prompts and proprietary code are omitted from this public repository.*
+
+<br>
+
+VLM/LLM pipeline for automated solar site configuration. Ingests raw Single Line Diagrams and Bills of Materials, extracts structured component data via modular per-component vision extractors, and populates a queryable SQLite database enriched with manufacturer spec sheet data.
+
+<br>
+
+**Evaluation:**
+- Field-level accuracy measured against manually verified ground truth JSON using a recursive leaf-node diff framework
+- Current error rate ~5%, primarily in information-dense diagram regions
+- Pipeline is currently overfit to a small set of initial test SLD annotation styles
+- Next focus: further prompt decomposition into narrower single-concern extractors, particularly for inverter and string-level data
+
+<br>
+
+<p align="center">
+  <img src="assets/example_SQL_1MWp.png" width="90%" alt="Lamina SQL Visual">
+  <br>
+  <em>Interactive site configuration viewer: Site → Inverter → DC Combiner → String hierarchy with full spec sheet drill-down.</em>
+</p>
+
+<br>
+
+See [vlm_parser/README.md](vlm_parser/README.md) for methodology, before/after visuals, and folder structure.
 
 <br>
 
