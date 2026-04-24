@@ -1,6 +1,6 @@
 # Lamina Intelligence: Forensic Solar Analytics
 
-This repository showcases the engineering framework behind the Lamina Intelligence platform, covering data infrastructure, ML methodology, and applied LLM/VLM tooling.
+This repository showcases the engineering framework behind the Lamina Intelligence platform, covering data infrastructure, ML methodology, and applied LLM/VLM document parsing.
 
 **Validation:** <br>
 Validated over 2,742 days of 5-minute SCADA telemetry, the Lamina Hybrid Engine identified rising asset degradation trends up to 3 years prior to failure, isolated recoverable revenue losses and OpEx optimisation opportunities.
