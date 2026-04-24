@@ -96,7 +96,6 @@ VLM/LLM pipeline for automated solar site configuration. Ingests raw Single Line
 - Field-level accuracy measured against manually verified ground truth JSON using a recursive leaf-node diff framework
 - Current error rate ~1%, however constrained to small scale SLDs
 - Pipeline is currently overfit to a small set of initial test SLD annotation styles
-- Next focus: further prompt decomposition into narrower single-concern extractors, particularly for inverter and string-level data
 
 <br>
 
