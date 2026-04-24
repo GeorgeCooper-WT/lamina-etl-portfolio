@@ -84,7 +84,7 @@ See [terraform/README.md](https://github.com/GeorgeCooper-WT/lamina-etl-portfoli
 
 ### 4. Document Intelligence & Site Configuration ```/vlm_parser```
 
-*Note: Work in progress. Prompts and proprietary code are omitted from this public repository.*
+*Note: Prompts and proprietary code are omitted from this public repository.*
 
 <br>
 
@@ -92,9 +92,19 @@ VLM/LLM pipeline for automated solar site configuration. Ingests raw Single Line
 
 <br>
 
+> **Status: Work in Progress (Scaling for 100MWp+)**
+> The current pipeline is functional for residential and commercial-scale SLDs (~1MWp). Currently scaling the architecture to handle the information density of utility-scale CAD drawings (100MWp+).
+>
+> To solve for VLM context window size, and the high density of large-scale CAD SLDs:
+>
+> - OCR Text Extraction: Moving away from VLM exclusive inference by introducing an OCR pre-processing layer; this grounds the LLM with high-accuracy text extractions to improve data reliability.
+> - Image Segmentation: Implementing automated image segmentation, breaking down complex SLDs into classified chunks. This enables a tighter context focus, reduced token usage, and greater VLM accuracy and consistency.
+
+<br>
+
 **Evaluation:**
 - Field-level accuracy measured against manually verified ground truth JSON using a recursive leaf-node diff framework
-- Current error rate ~1%, however constrained to small scale SLDs
+- Current error rate ~1% (constrained to small-scale SLDs)
 - Pipeline is currently overfit to a small set of initial test SLD annotation styles
 
 <br>
@@ -108,17 +118,6 @@ VLM/LLM pipeline for automated solar site configuration. Ingests raw Single Line
 <br>
 
 See [vlm_parser/README.md](vlm_parser/README.md) for methodology, before/after visuals, and folder structure.
-
-<br>
-
-**VLM Development: Utility-Scale (100MWp+) parsing**
-
-To move beyond small-scale 1MWp sites, I am currently overhauling the ingestion pipeline to handle high-density, utility-scale CAD SLDs (100MWp+).
-
-Improvement focus (Pre-processing):
-
-- OCR Text Extraction: Moving away from VLM exclusive inference by introducing an OCR pre-processing layer; this grounds the LLM with high-accuracy text extractions to improve data reliability.
-- Image Segmentation: Implementing automated image segmentation, breaking down complex SLDs into classified chunks. This enables a tighter context focus, reduced token usage, and greater VLM accuracy and consistency.
 
 <br>
 
