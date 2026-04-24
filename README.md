@@ -118,8 +118,8 @@ To move beyond small-scale 1MWp sites, I am currently overhauling the ingestion 
 
 Improvement focus (Pre-processing):
 
-- OCR Text Extraction: Moving away from single-pass VLM inference, introducing an OCR pre-processing layer, grounding the LLM with OCR higher accuracy extracted text.
-- Image Segmentation: Implementing automated image segmentation, breaking down complex SLDs into classified chunks. This enabled a tighter context focus, reduced token usage, and greater VLM accuracy and consistancy.
+- OCR Text Extraction: Moving away from VLM exclusive inference by introducing an OCR pre-processing layer; this grounds the LLM with high-accuracy text extractions to improve data reliability.
+- Image Segmentation: Implementing automated image segmentation, breaking down complex SLDs into classified chunks. This enables a tighter context focus, reduced token usage, and greater VLM accuracy and consistency.
 
 <br>
 
