@@ -112,6 +112,17 @@ See [vlm_parser/README.md](vlm_parser/README.md) for methodology, before/after v
 
 <br>
 
+**VLM Development: Utility-Scale (100MWp+) parsing**
+
+To move beyond small-scale 1MWp sites, I am currently overhauling the ingestion pipeline to handle high-density, utility-scale CAD SLDs (100MWp+).
+
+Improvement focus (Pre-processing):
+
+- OCR Text Extraction: Moving away from single-pass VLM inference, introducing an OCR pre-processing layer, grounding the LLM with OCR higher accuracy extracted text.
+- Image Segmentation: Implementing automated image segmentation, breaking down complex SLDs into classified chunks. This enabled a tighter context focus, reduced token usage, and greater VLM accuracy and consistancy.
+
+<br>
+
 ---
 
 **Note:** This portfolio is intended for demonstration and code review purposes. No proprietary data or credentials are included.
