@@ -1,22 +1,46 @@
-# Lamina Intelligence: Forensic Solar Analytics
+# Lamina Intelligence: Solar Analytics Portfolio
 
 <br>
 
-> **Repository Scope & Commercial IP Notice**
-> **Please note:** The codebase provided in this public repository is a representative snapshot intended purely for code review and architectural demonstration. It showcases coding standards, IaC structure (Terraform), containerisation (Docker), and general data engineering capabilities, not the full working codebase. 
-> 
-> To protect IP, the core proprietary physics-ML engine, the advanced OpenCV/OCR parsing logic, and the dashboard source code have been withheld. The images below demonstrate the actual outcomes and capabilities of the current, proprietary production platform.
-
 > **Repository Scope & IP Notice**
 >
-> *This repository showcases the engineering framework behind the Lamina Intelligence platform, covering data infrastructure, ML methodology, and applied LLM/VLM document parsing. The code in this repository represents the initial MVP and pipelines intended for general code review.*
+> **Please note:** This public repository is a representative snapshot intended purely for code review and architectural demonstration. It showcases coding standards, IaC structure (Terraform), containerisation (Docker), and general data engineering capabilities, not the full working codebase.
+> 
+> To protect commercial IP, the core proprietary physics-ML engine, the dashboard source code, and the scaled OpenCV/OCR + VLM parsing architecture (which now handles dense 100MWp+ SLD diagrams) have been withheld.
 >
-> *Since this MVP, the platform has evolved significantly within the VLM parsing section. The updated VLM parsing architecture has scaled to handle dense 100MWp+ SLD diagrams utilising a broader tech stack (OCR, OpenCV etc.) alongside BOMs to create a centralized SQL database. This platform is currently maintained as proprietary IP and excluded from this portfolio snapshot.*
+> The images below demonstrate the actual outcomes of the current, proprietary production platform, whilst the code highlights general coding quality.
+
+<br>
+
+## 1. Document Intelligence: VLM & OCR Parser Overview
+*Transforming unstructured engineering diagrams into queryable databases.*
+
+<br>
+
+<p align="center">
+  <img src="assets/test_sld_100mwp.png" width="90%" alt="Example Input SLD">
+  <br>
+  <em><strong>The Input:</strong> Unstructured, high-density 100MWp AutoCAD Single Line Diagram (SLD).</em>
+</p>
+
+<br>
+<br>
+
+<p align="center">
+  <img src="assets/test_sql_app_100mwp.png" width="90%" alt="Lamina SQL Visual">
+  <br>
+  <em><strong>The Output:</strong> Interactive relational digital twin. Site → Inverter → DC Combiner → String hierarchy with full spec sheet drill-down.</em>
+</p>
+
+<br>
+
+## 2. Physics-ML Engine: Performance Analysis Overview
+*Isolating reversible losses from irreversible degradation.*
 
 <br>
 
 **Validation:** <br>
-Validated over 2,742 days of 5-minute SCADA telemetry, the Lamina Hybrid Engine identified rising asset degradation trends up to 3 years prior to failure, isolated recoverable revenue losses and OpEx optimisation opportunities.
+Validated over **2,742 days** of 5-minute SCADA telemetry, the Lamina Hybrid Engine identified rising asset degradation trends up to **3 years** prior to failure, isolated recoverable revenue losses and OpEx optimisation opportunities.
 
 **Model Validation Report Abstract:** <br>
 See [lamina-ml-validation-abstract.pdf](reports/lamina-ml-validation-abstract.pdf) for the executive summary and contents of the Lamina ML model validation report. The full report is available on request.
@@ -105,32 +129,24 @@ VLM/LLM pipeline for automated solar site configuration. Ingests raw Single Line
 
 <br>
 
-> **Status: Work in Progress (Scaling for 100MWp+)**
-> The current pipeline is functional for residential and commercial-scale SLDs (~1MWp). Currently scaling the architecture to handle the information density of utility-scale CAD drawings (100MWp+).
->
-> To solve for VLM context window size, and the high density of large-scale CAD SLDs:
->
-> - OCR Text Extraction: Moving away from VLM exclusive inference by introducing an OCR pre-processing layer; this grounds the LLM with high-accuracy text extractions to improve data reliability.
-> - Image Segmentation: Implementing automated image segmentation, breaking down complex SLDs into classified chunks. This enables a tighter context focus, reduced token usage, and greater VLM accuracy and consistency.
+**The MVP (Code included in /vlm_parser)**
+The codebase in this folder represents snippets from the initial MVP. It highlights the initial functional method for residential and commercial-scale SLDs (~1MWp).
+
+- Evaluation: Field-level accuracy measured against manually verified ground truth JSON using a recursive leaf-node diff framework.
+- Constraints: Error rate ~1% but is constrained to small-scale SLDs and overfit to initial annotation styles.
 
 <br>
 
-**Evaluation:**
-- Field-level accuracy measured against manually verified ground truth JSON using a recursive leaf-node diff framework
-- Current error rate ~1% (constrained to small-scale SLDs)
-- Pipeline is currently overfit to a small set of initial test SLD annotation styles
+**Product Evolution (Proprietary IP)**
+To solve for VLM context window size and handle the massive information density of utility-scale CAD drawings (100MWp+), the architecture was evolved far beyond this MVP:
+
+- **OCR Text Extraction:** Moved away from VLM-exclusive inference by introducing an OCR pre-processing layer to ground the LLM with high-accuracy text.
+- **Image Segmentation:** Implemented automated OpenCV image segmentation to break down complex SLDs into classified chunks, enabling tighter context focus and drastically reduced token usage.
+- **Functional Application:** A functional frontend application to upload files, and interact with the SQLDB has been developed.
 
 <br>
 
-<p align="center">
-  <img src="assets/example_SQL_1MWp.png" width="90%" alt="Lamina SQL Visual">
-  <br>
-  <em>Interactive site configuration viewer: Site → Inverter → DC Combiner → String hierarchy with full spec sheet drill-down.</em>
-</p>
-
-<br>
-
-See [vlm_parser/README.md](vlm_parser/README.md) for methodology, before/after visuals, and folder structure.
+See [vlm_parser/README.md](vlm_parser/README.md) for MVP methodology, code snippets, before/after visuals, and folder structure.
 
 <br>
 
