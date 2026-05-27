@@ -4,9 +4,9 @@
 
 > **Repository Scope & IP Notice**
 >
-> *This repository showcases the engineering framework behind the Lamina Intelligence platform, covering data infrastructure, ML methodology, and applied LLM/VLM document parsing. The code in this repository > represents the initial MVP and pipelines intended for general code review.*
+> *This repository showcases the engineering framework behind the Lamina Intelligence platform, covering data infrastructure, ML methodology, and applied LLM/VLM document parsing. The code in this repository represents the initial MVP and pipelines intended for general code review.*
 >
-> *Since this MVP, the platform has evolved significantly within the VLM parsing section. The updated VLM parsing architecture has scaled to handle dense 100MWp+ SLD diagrams utilising a broader tech stack (OCR, > OpenCV etc.) alongside BOMs to create a centralized SQL database. This platform is currently maintained as proprietary IP and excluded from this portfolio snapshot.*
+> *Since this MVP, the platform has evolved significantly within the VLM parsing section. The updated VLM parsing architecture has scaled to handle dense 100MWp+ SLD diagrams utilising a broader tech stack (OCR, OpenCV etc.) alongside BOMs to create a centralized SQL database. This platform is currently maintained as proprietary IP and excluded from this portfolio snapshot.*
 
 <br>
 
