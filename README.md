@@ -2,6 +2,11 @@
 
 <br>
 
+> **Repository Scope & Commercial IP Notice**
+> **Please note:** The codebase provided in this public repository is a representative snapshot intended purely for code review and architectural demonstration. It showcases coding standards, IaC structure (Terraform), containerisation (Docker), and general data engineering capabilities, not the full working codebase. 
+> 
+> To protect IP, the core proprietary physics-ML engine, the advanced OpenCV/OCR parsing logic, and the dashboard source code have been withheld. The images below demonstrate the actual outcomes and capabilities of the current, proprietary production platform.
+
 > **Repository Scope & IP Notice**
 >
 > *This repository showcases the engineering framework behind the Lamina Intelligence platform, covering data infrastructure, ML methodology, and applied LLM/VLM document parsing. The code in this repository represents the initial MVP and pipelines intended for general code review.*
