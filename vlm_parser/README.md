@@ -4,9 +4,13 @@ A vision-language model pipeline for extracting structured electrical data from 
 
 Provided as a portfolio piece demonstrating applied LLM engineering, structured data extraction, and ETL pipeline design.
 
-> **Status: Work in Progress**
-> Functional end-to-end but currently tuned against a small set of test SLDs. Error rate is approximately 5%, primarily in information-dense diagram regions. 
-> The main avenue being explored is further decomposing extraction into narrower, single-concern prompts, particularly for inverter and string-level data where overlapping values increase ambiguity. This constrains VLM attention to a tighter scope, reducing hallucination and making errors easier to isolate.
+> **Status: Work in Progress (Scaling for 100MWp+)**
+> The current pipeline is functional for residential and commercial-scale SLDs (~1MWp). Currently scaling the architecture to handle the information density of utility-scale CAD drawings (100MWp+).
+>
+> To solve for VLM context window size, and the high density of large-scale CAD SLDs:
+>
+> - OCR-Grounding: Pre-extracting text to ground the VLM in factual text content.
+> - Spatial Segmentation: Classifying and decomposing large-scale CAD drawings into manageable and focused context windows to maintain consistency, resolution, and output focus.
 
 ---
 
