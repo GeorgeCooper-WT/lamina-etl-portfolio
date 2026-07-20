@@ -18,9 +18,23 @@
 <br>
 
 <p align="center">
+  <a href="https://youtu.be/z3lXZdVrZb8">
+    <img src="assets/lamina_demo_project_thumbnail.png" alt="Lamina Product Overview Video" width="70%">
+  </a>
+  <br>
+  <em>90-second demo: Ingesting unstructured SLDs into a live relational digital twin.</em>
+</p>
+
+<br>
+<br>
+
+<p>
+  <strong>Example Input:</strong> Unstructured, high-density 100MWp AutoCAD Single Line Diagram (SLD).
+</p>
+
+<p align="center">
   <img src="assets/test_sld_100mwp.png" width="90%" alt="Example Input SLD">
   <br>
-  <em><strong>The Input:</strong> Unstructured, high-density 100MWp AutoCAD Single Line Diagram (SLD).</em>
 </p>
 
 <br>
